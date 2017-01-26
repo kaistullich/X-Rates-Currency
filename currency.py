@@ -7,8 +7,6 @@ soup = BeautifulSoup(page, 'html.parser')
 
 currency_table = soup.find(class_='ratesTable')
 currency_table_row_name = currency_table.find_all('td')
-# print(type(currency_table_row_name))
-
 
 euro_currency = []
 for tag in currency_table_row_name:
@@ -17,7 +15,6 @@ for tag in currency_table_row_name:
     if 'British Pound' in tag:  # stop when 'British Pounds' is found
         break
 
-# print(euro_currency)
-
 del euro_currency[-1]  # Delete 'British Pounds' from the list always last element
 
+print(euro_currency)
