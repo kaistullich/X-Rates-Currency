@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask, render_template
 from urllib.request import urlopen
 
 app = Flask(__name__)
