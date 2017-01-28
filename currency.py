@@ -13,4 +13,3 @@ for tag in currency_table_row[:3]:
     euro_text = tag.get_text()  # pull only the text from the 'td' tags
     euro_append = euro_currency.append(euro_text)  # append the text from 'td' tags
 
-print(euro_currency)
