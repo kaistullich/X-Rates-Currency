@@ -14,8 +14,7 @@ def index():
     currency_table = soup.find(class_='ratesTable')  # finds the table
     currency_table_row = currency_table.find_all('td')  # pulls all the 'td' tags from the 'ratesTable'
 
-    ''' euro_currency[0] = Euro
-        euro_currency[1] = 1.00 USD -> 1.00 EUR
+    ''' euro_currency[1] = 1.00 USD -> 1.00 EUR
         euro_currency[2] = 1.00 EUR -> 1.00 USD 
     '''
     euro_currency = []
