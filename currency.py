@@ -41,7 +41,7 @@ def index():
         conn.commit()
 
     except Exception as db_insert:
-        print('The following error occured inserting into DB: ', db_insert)
+        print('The following error occured INSERTING into DB: ', db_insert)
     
     try:  # Try/Except for retrieving from the DB 
         euro_retrieve = '''SELECT usd_to_eur
@@ -52,7 +52,7 @@ def index():
             print(euro)
 
     except Exception as db_pull:
-        print('The following error occured retrieving from the DB: ', db_pull)
+        print('The following error occured RETRIEVING from the DB: ', db_pull)
 
             
     return render_template('currency.html', euro_currency=euro_currency)
