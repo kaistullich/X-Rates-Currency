@@ -43,11 +43,12 @@ def index():
     except Exception as db_insert:
         print('The following error occured INSERTING into DB: ', db_insert)
     
+
     try:  # Try/Except for retrieving from the DB 
         euro_retrieve = '''SELECT usd_to_eur
                             FROM euro_currency'''
         output = c.execute(euro_retrieve)
-
+        
         for euro in output:
             print(euro)
 
