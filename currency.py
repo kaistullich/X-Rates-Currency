@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template
 from urllib.request import urlopen
 import sqlite3
+import datetime
 
 app = Flask(__name__)
 
@@ -27,11 +28,18 @@ def index():
         conn = sqlite3.connect('currency.sqlite')
         c = conn.cursor()  # cursor
         c.execute('''CREATE TABLE IF NOT EXISTS euro_currency
-                    (id INTEGER NOT NULL PRIMARY KEY, 
+                    (id INTEGER NOT NULL PRIMARY KEY,
+                    date TEXT,
+                    time TEXT,
                     usd_to_eur REAL, 
                     eur_to_usd REAL)''')
-
-        c.execute('INSERT INTO euro_currency VALUES (?, ?, ?)', (None, euro_currency[0], euro_currency[1]))
+        
+        current_datetime = datetime.datetime.now()
+        date = str(current_datetime.date())
+        time = (str(current_datetime.hour) + ':' + str(current_datetime.minute) + ':' + str(current_datetime.second))
+        print(date)
+        print(time)
+        c.execute('INSERT INTO euro_currency VALUES (?, ?, ?, ?, ?)', (None, date, time, euro_currency[0], euro_currency[1]))
         conn.commit()
 
     except Exception as db_insert:
@@ -41,7 +49,7 @@ def index():
         euro_retrieve = '''SELECT usd_to_eur
                             FROM euro_currency'''
         output = c.execute(euro_retrieve)
-        
+
         for euro in output:
             print(euro)
 
