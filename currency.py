@@ -5,6 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     url = 'http://www.x-rates.com/table/?from=USD&amount=1'
@@ -22,19 +23,23 @@ def index():
         euro_text = tag.get_text()  # pull only the text from the 'td' tags
         euro_append = euro_currency.append(euro_text)  # append the text
 
-    try:
-        conn = sqlite3.connect('current_currency.sqlite')
+    try:  # Try/Except for inserting into the DB
+        conn = sqlite3.connect('currency.sqlite')
         c = conn.cursor()  # cursor
-        # c.execute('''CREATE TABLE currency 
-        #             (usd_to_eur real, eur_to_usd real)''')
-        c.execute('INSERT INTO currency VALUES (?, ?)', (euro_currency[0], euro_currency[1]))
-        conn.commit()
-        conn.close()
+        c.execute('''CREATE TABLE IF NOT EXISTS euro_currency
+                    (id INTEGER NOT NULL PRIMARY KEY, 
+                    usd_to_eur REAL, 
+                    eur_to_usd REAL)''')
 
-    except Exception as e:
-        print(e)
+        c.execute('INSERT INTO euro_currency VALUES (?, ?, ?)', (None, euro_currency[0], euro_currency[1]))
+        conn.commit()
+
+    except Exception as db_insert:
+        print('The following error occured inserting into DB: ', db_insert)
+
             
     return render_template('currency.html', euro_currency=euro_currency)
     
 if __name__ == '__main__':
     app.run(debug=True)
+if __name__ ==
