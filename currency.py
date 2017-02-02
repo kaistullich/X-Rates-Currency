@@ -37,8 +37,6 @@ def index():
         current_datetime = datetime.datetime.now()
         date = str(current_datetime.date())
         time = (str(current_datetime.hour) + ':' + str(current_datetime.minute) + ':' + str(current_datetime.second))
-        print(date)
-        print(time)
         c.execute('INSERT INTO euro_currency VALUES (?, ?, ?, ?, ?)', (None, date, time, euro_currency[0], euro_currency[1]))
         conn.commit()
 
