@@ -49,3 +49,5 @@ try:  # Try/Except for retrieving from the DB
 
 except Exception as db_pull:
     print('The following error occured RETRIEVING from the DB: ', db_pull)
+
+
