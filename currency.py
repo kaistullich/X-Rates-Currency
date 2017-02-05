@@ -40,14 +40,22 @@ except Exception as db_insert:
 
 
 try:  # Try/Except for retrieving from the DB 
-    euro_retrieve = '''SELECT usd_to_eur
+    euro_retrieve = '''SELECT date, usd_to_eur
                         FROM euro_currency'''
     output = c.execute(euro_retrieve)
+    print(output)
     
-    for euro in output:
-        print(euro)
+    def retrieve_euro():
+        date_euro_list = []
+        for date,euro in output:
+            appending = date,euro
+            date_euro_list.append(appending)
+        
+        for date,euro in date_euro_list:
+            print(date, '-->', euro)
 
 except Exception as db_pull:
     print('The following error occured RETRIEVING from the DB: ', db_pull)
 
-
+if __name__ == '__main__':
+    retrieve_euro()
