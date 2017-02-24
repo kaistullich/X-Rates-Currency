@@ -26,9 +26,9 @@ try:  # Try/Except for inserting into the DB
                 (id INTEGER NOT NULL PRIMARY KEY,
                 date TEXT,
                 time TEXT,
-                usd_to_eur REAL, 
+                usd_to_eur REAL,
                 eur_to_usd REAL)''')
-    
+
     current_datetime = datetime.datetime.now()
     date = str(current_datetime.date())
     time = (str(current_datetime.hour) + ':' + str(current_datetime.minute) + ':' + str(current_datetime.second))
@@ -36,26 +36,26 @@ try:  # Try/Except for inserting into the DB
     conn.commit()
 
 except Exception as db_insert:
-    print('The following error occured INSERTING into DB: ', db_insert)
+    print('The following error occurred INSERTING into DB: ', db_insert)
 
 
-try:  # Try/Except for retrieving from the DB 
+try:  # Try/Except for retrieving from the DB
     euro_retrieve = '''SELECT date, usd_to_eur
                         FROM euro_currency'''
     output = c.execute(euro_retrieve)
-    print(output)
     
     def retrieve_euro():
         date_euro_list = []
-        for date,euro in output:
-            appending = date,euro
+        for date, euro in output:
+            appending = date, euro
             date_euro_list.append(appending)
-        
-        for date,euro in date_euro_list:
+        print('DATE         EURO\n')
+
+        for date, euro in date_euro_list:
             print(date, '-->', euro)
 
 except Exception as db_pull:
-    print('The following error occured RETRIEVING from the DB: ', db_pull)
+    print('The following error occurred RETRIEVING from the DB: ', db_pull)
 
 if __name__ == '__main__':
     retrieve_euro()
